@@ -4,7 +4,7 @@
   "description": "Portal para programadores encontrarem vagas de trabalho",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon App.js"
   },
   "author": "",
   "license": "ISC",
