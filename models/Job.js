@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../db/connection');
+const {DataTypes} = require('sequelize');
+const {sequelize} = require('../db/connection');
 
-const Jobs = sequelize.define('Jobs', {
+const Job = sequelize.define('Jobs', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -9,24 +9,19 @@ const Jobs = sequelize.define('Jobs', {
     },
     title: {
         type: DataTypes.TEXT,
-        allowNull: false
     },
     salary: {
         type: DataTypes.TEXT,
-        allowNull: false
     },
     company: {
         type: DataTypes.TEXT,
-        allowNull: false
     },
     email: {
         type: DataTypes.TEXT,
-        allowNull: false
     },
-    new_job: {
+    new: {
         type: DataTypes.INTEGER,
-        allowNull: false
     }
 });
 
-module.exports = {Jobs};
+module.exports = {Job};

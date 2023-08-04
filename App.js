@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const db = require('./db/connection')
-
+const {sequelize} = require('./db/connection');
+const bodyParser = require('body-parser')
 
 const port = 3000;
 
@@ -10,9 +10,13 @@ app.listen(port, function () {
     console.log(`Acesse: localhost:${port}`)
 })
 
-// db connection
-
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
     res.send('11')
 })
+
+
+
+
+app.use('/jobs', require('./Routes/jobs'))
