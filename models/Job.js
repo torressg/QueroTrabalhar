@@ -19,7 +19,7 @@ const Job = sequelize.define('Jobs', {
     email: {
         type: DataTypes.TEXT,
     },
-    new: {
+    new_job: {
         type: DataTypes.INTEGER,
     }
 });
