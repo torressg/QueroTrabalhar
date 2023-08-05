@@ -13,7 +13,7 @@ app.listen(port, function () {
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
-    res.send('11')
+    res.send('../index')
 })
 
 
