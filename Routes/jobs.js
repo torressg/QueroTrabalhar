@@ -2,13 +2,18 @@ const express = require('express');
 const router = express.Router();
 const { Job } = require('../models/Job')
 
-router.get('/test', (req, res) => {
-    res.send("chupa greco, fiz uma API")
-})
-
 router.get('/add', (req, res) => {
     res.render('add')
 })
+
+router.get('/view/:id', (req, res) => Job.findOne ({
+    where: {id: req.params.id}
+}).then(job => {
+    res.render('view', {
+        job
+    })
+}).catch(error => console.log(error))
+)
 
 router.post('/add', (req, res) => {
 

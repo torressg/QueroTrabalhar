@@ -4,7 +4,9 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const { sequelize } = require('./db/connection');
 const bodyParser = require('body-parser')
-const {Job} = require('./models/Job')
+const { Job } = require('./models/Job')
+const Sequelize = require ('sequelize')
+const Op = Sequelize.Op
 
 const port = 3000;
 
@@ -21,17 +23,40 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.get('/', (req, res) => {
-    Job.findAll({
-        order: [
-            ['createdAt', 'DESC']
-        ]
-    })
-    .then(jobs => {
-        res.render('index', {
-            jobs
-        })
 
-    })
+    let search = req.query.job
+    let query = '%'+search+'%'
+
+    if (!search) {
+        Job.findAll({
+            order: [
+                ['createdAt', 'DESC']
+            ]
+        })
+            .then(jobs => {
+                res.render('index', {
+                    jobs
+                })
+
+            })
+            .catch(error=>console.log(error))
+    } else {
+        Job.findAll({
+            where: {title: {[Op.like]: query}},
+            order: [
+                ['createdAt', 'DESC']
+            ]
+        })
+        .then(jobs => {
+            res.render('index', {
+                jobs, search
+            })
+            
+        })
+        .catch(error=>console.log(error))
+
+    }
+
 })
 
 app.use('/jobs', require('./Routes/jobs'));
